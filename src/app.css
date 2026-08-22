@@ -1,3 +1,81 @@
+@property --bg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #0b0d12;
+}
+
+@property --bg-elevated {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #141820;
+}
+
+@property --fg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #e8edf5;
+}
+
+@property --fg-muted {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #8b93a7;
+}
+
+@property --accent {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #6ea8ff;
+}
+
+@property --border {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #2a3140;
+}
+
+@property --success {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #3dff7a;
+}
+
+@property --code-bg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #10141c;
+}
+
+@property --chrome-bg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #0b0d12;
+}
+
+@property --chrome-fg {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #e8edf5;
+}
+
+@property --chrome-muted {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #8b93a7;
+}
+
+@property --chrome-accent {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #6ea8ff;
+}
+
+@property --chrome-border {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #2a3140;
+}
+
 :root {
 	--bg: #0b0d12;
 	--bg-elevated: #141820;
@@ -58,8 +136,13 @@ input:focus-visible {
 	color: var(--chrome-fg);
 	font-family: var(--chrome-body);
 	transition:
-		background-color 0.45s ease,
-		color 0.45s ease;
+		--chrome-bg 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--chrome-fg 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--chrome-muted 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--chrome-accent 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--chrome-border 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		background-color 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		color 0.95s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .page {
@@ -72,8 +155,16 @@ input:focus-visible {
 	color: var(--fg);
 	font-family: var(--font-body);
 	transition:
-		background-color 0.45s ease,
-		color 0.45s ease;
+		--bg 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--bg-elevated 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--fg 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--fg-muted 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--accent 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--border 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--success 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		--code-bg 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		background-color 0.95s cubic-bezier(0.23, 1, 0.32, 1),
+		color 0.95s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .container {
@@ -109,10 +200,6 @@ input:focus-visible {
 	background: var(--chrome-bg);
 	color: var(--chrome-fg);
 	font-family: var(--chrome-body);
-	transition:
-		background-color 0.45s ease,
-		color 0.45s ease,
-		border-color 0.45s ease;
 }
 
 .header-inner {
@@ -243,10 +330,6 @@ code {
 	font-family: var(--chrome-body);
 	position: relative;
 	z-index: 1;
-	transition:
-		background-color 0.45s ease,
-		color 0.45s ease,
-		border-color 0.45s ease;
 }
 
 .site-footer p {

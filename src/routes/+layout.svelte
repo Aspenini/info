@@ -11,7 +11,7 @@
 	let { children } = $props();
 
 	const doom = $derived(page.url.pathname.startsWith('/mcu') && mcuView.doomsday);
-	const theme = $derived(doom ? 'doom' : themeFromPath(page.url.pathname));
+	const theme = $derived(themeFromPath(page.url.pathname));
 </script>
 
 <svelte:head>
@@ -20,7 +20,7 @@
 
 <div class="app" data-mode={doom ? 'doomsday' : undefined}>
 	<SiteHeader />
-	<div class="page" data-theme={theme}>
+	<div class="page" data-theme={theme} data-mode={doom ? 'doomsday' : undefined}>
 		<main id="content" class="main">
 			{@render children()}
 		</main>

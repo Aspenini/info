@@ -1,14 +1,33 @@
 .mcu-page {
 	position: relative;
+	--mode-ease: cubic-bezier(0.23, 1, 0.32, 1);
+	--mode-duration: 0.88s;
 }
 
 .mcu-hero {
 	margin: 0 0 1.25rem;
 }
 
+.hero-stack {
+	display: grid;
+}
+
+.hero-copy {
+	grid-area: 1 / 1;
+	opacity: 0;
+	transform: translateY(0.45rem);
+	pointer-events: none;
+}
+
+.hero-copy.active {
+	opacity: 1;
+	transform: none;
+	pointer-events: auto;
+}
+
 .hero-kicker {
 	margin: 0 0 0.2rem;
-	font-family: var(--font-display);
+	font-family: 'Cinzel', 'Times New Roman', serif;
 	font-size: 0.82rem;
 	font-weight: 700;
 	letter-spacing: 0.28em;
@@ -24,25 +43,43 @@
 	color: var(--accent);
 }
 
-.page[data-theme='doom'] .hero-title {
+.hero-copy-doom .hero-title {
+	font-family: 'Cinzel', 'Times New Roman', serif;
 	letter-spacing: 0.12em;
 	text-shadow: 0 0 42px color-mix(in srgb, var(--accent) 42%, transparent);
 }
 
-.page[data-theme='doom'] .watch-item label {
-	border-radius: 4px;
-}
-
 .mode-toggle {
-	display: inline-flex;
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	margin: 1rem 0 0;
 	padding: 0.16rem;
 	border: 1px solid var(--border);
 	border-radius: 999px;
 	background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+	width: fit-content;
+	max-width: 100%;
+}
+
+.mode-toggle-thumb {
+	position: absolute;
+	top: 0.16rem;
+	bottom: 0.16rem;
+	left: 0.16rem;
+	width: calc(50% - 0.16rem);
+	border-radius: 999px;
+	background: var(--accent);
+	pointer-events: none;
+}
+
+.mode-toggle.is-doom .mode-toggle-thumb {
+	transform: translateX(100%);
 }
 
 .mode-toggle button {
+	position: relative;
+	z-index: 1;
 	font-family: var(--font-mono);
 	font-size: 0.75rem;
 	letter-spacing: 0.04em;
@@ -50,13 +87,12 @@
 	background: transparent;
 	border: 0;
 	border-radius: 999px;
-	padding: 0.32rem 0.85rem;
+	padding: 0.32rem 0.9rem;
 	cursor: pointer;
 }
 
 .mode-toggle button[aria-pressed='true'] {
 	color: #0b0d12;
-	background: var(--accent);
 }
 
 .mode-toggle button:hover:not([aria-pressed='true']) {
@@ -179,10 +215,39 @@
 	background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 
+.list-stack {
+	position: relative;
+	overflow: hidden;
+}
+
+.list-pane {
+	opacity: 0;
+	transform: translateY(1.1rem);
+	pointer-events: none;
+}
+
+.list-pane.active {
+	opacity: 1;
+	transform: none;
+	pointer-events: auto;
+}
+
+.list-pane:not(.active) {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
 .watch-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+
+.doom-list .watch-item label {
+	border-radius: 4px;
 }
 
 .watch-item label {
@@ -275,4 +340,28 @@
 	.jump-nav a {
 		padding: 0.24rem 0.5rem;
 	}
+}
+
+.mcu-page.motion .hero-copy,
+.mcu-page.motion .list-pane,
+.mcu-page.motion .mode-toggle-thumb {
+	transition:
+		opacity var(--mode-duration) var(--mode-ease),
+		transform var(--mode-duration) var(--mode-ease),
+		background-color 0.95s var(--mode-ease);
+}
+
+.mcu-page.motion .hero-copy.active,
+.mcu-page.motion .list-pane.active {
+	transition-delay: 0.08s;
+}
+
+.mcu-page.motion .mode-toggle,
+.mcu-page.motion .mode-toggle button,
+.mcu-page.motion .progress-row button,
+.mcu-page.motion .jump-nav a {
+	transition:
+		color 0.55s var(--mode-ease),
+		background-color 0.55s var(--mode-ease),
+		border-color 0.55s var(--mode-ease);
 }

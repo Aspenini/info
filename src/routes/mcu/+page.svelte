@@ -12,16 +12,17 @@
 	import { loadMcuView, mcuView, setDoomsday } from '$lib/mcu-mode.svelte';
 	import { site } from '$lib/pages';
 	import '$lib/styles/mcu.css';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	const KEY = 'checklist:mcu';
+	const MODE_MS = 880;
 
 	let watched = $state<Record<string, boolean>>({});
+	let listStack = $state<HTMLDivElement>();
+	let motion = $state(false);
+	let heightAnim: Animation | undefined;
 
 	const doom = $derived(mcuView.doomsday);
-	const visibleKinds = $derived(
-		doom ? kindKey.filter((kind) => doomsdayTitles.some((item) => item.kind === kind)) : kindKey
-	);
 	const total = $derived(doom ? doomsdayTitles.length : mcuTitles.length);
 	const done = $derived(
 		doom
@@ -52,6 +53,37 @@
 		persist();
 	}
 
+	function reducedMotion() {
+		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
+
+	async function switchMode(value: boolean) {
+		if (value === mcuView.doomsday) return;
+
+		const el = listStack;
+		const canAnim = motion && !!el && !reducedMotion();
+		const from = el?.getBoundingClientRect().height ?? 0;
+
+		setDoomsday(value);
+
+		if (window.scrollY > 140) {
+			window.scrollTo({ top: 0, behavior: canAnim ? 'smooth' : 'auto' });
+		}
+
+		if (!canAnim || !el) return;
+
+		await tick();
+		const to = el.getBoundingClientRect().height;
+		if (Math.abs(to - from) < 1) return;
+
+		heightAnim?.cancel();
+		const anim = el.animate([{ height: `${from}px` }, { height: `${to}px` }], {
+			duration: MODE_MS,
+			easing: 'cubic-bezier(0.23, 1, 0.32, 1)'
+		});
+		heightAnim = anim;
+	}
+
 	onMount(() => {
 		loadMcuView();
 		try {
@@ -59,6 +91,9 @@
 		} catch {
 			watched = {};
 		}
+		requestAnimationFrame(() => {
+			motion = true;
+		});
 	});
 </script>
 
@@ -72,24 +107,28 @@
 	/>
 </svelte:head>
 
-<div class="container mcu-page">
+<div class="container mcu-page" class:motion>
 	<header class="mcu-hero">
-		{#if doom}
-			<p class="hero-kicker">Avengers</p>
-			<h1 class="hero-title">Doomsday</h1>
-			<p class="hero-sub">Disney’s official must-watch list.</p>
-		{:else}
-			<h1 class="hero-title">MCU</h1>
-			<p class="hero-sub">Release order. Check off what you’ve watched — progress stays in this browser.</p>
-		{/if}
+		<div class="hero-stack">
+			<div class="hero-copy" class:active={!doom} aria-hidden={doom}>
+				<h1 class="hero-title">MCU</h1>
+				<p class="hero-sub">Release order. Check off what you’ve watched — progress stays in this browser.</p>
+			</div>
+			<div class="hero-copy hero-copy-doom" class:active={doom} aria-hidden={!doom}>
+				<p class="hero-kicker">Avengers</p>
+				<h1 class="hero-title">Doomsday</h1>
+				<p class="hero-sub">Disney’s official must-watch list.</p>
+			</div>
+		</div>
 
-		<div class="mode-toggle" role="group" aria-label="Watch list">
-			<button type="button" aria-pressed={!doom} onclick={() => setDoomsday(false)}>Release order</button>
-			<button type="button" aria-pressed={doom} onclick={() => setDoomsday(true)}>Doomsday</button>
+		<div class="mode-toggle" class:is-doom={doom} role="group" aria-label="Watch list">
+			<span class="mode-toggle-thumb"></span>
+			<button type="button" aria-pressed={!doom} onclick={() => switchMode(false)}>Release order</button>
+			<button type="button" aria-pressed={doom} onclick={() => switchMode(true)}>Doomsday</button>
 		</div>
 
 		<ul class="kind-key" aria-label="Media types">
-			{#each visibleKinds as kind}
+			{#each kindKey as kind}
 				<li>{kindLabels[kind]}</li>
 			{/each}
 		</ul>
@@ -100,55 +139,59 @@
 		<button type="button" onclick={clearProgress}>Clear</button>
 	</div>
 
-	{#if doom}
-		<ol class="watch-list">
-			{#each doomsdayTitles as item, i (item.id)}
-				{@render watchRow(item, i + 1, entryIds(item))}
+	<div class="list-stack" bind:this={listStack}>
+		<div class="list-pane" class:active={!doom} inert={doom} aria-hidden={doom}>
+			<nav class="jump-nav" aria-label="Jump to phase">
+				<a href="#infinity-saga">Infinity</a>
+				<a href="#phase-one">P1</a>
+				<a href="#phase-two">P2</a>
+				<a href="#phase-three">P3</a>
+				<a href="#multiverse-saga">Multiverse</a>
+				<a href="#phase-four">P4</a>
+				<a href="#phase-five">P5</a>
+				<a href="#phase-six">P6</a>
+				<a href="#upcoming">Upcoming</a>
+			</nav>
+
+			{#each mcuSagas as saga (saga.id)}
+				<section
+					class="saga"
+					class:saga-infinity={saga.id === 'infinity-saga'}
+					class:saga-multiverse={saga.id === 'multiverse-saga'}
+					id={saga.id}
+				>
+					<h2 class="saga-title">{saga.symbol ? `${saga.symbol} ` : ''}{saga.name}</h2>
+
+					{#each saga.phases as phase (phase.id)}
+						<section class="phase" class:phase-upcoming={phase.upcoming} id={phase.id}>
+							<h3 class="phase-title">{phase.name}</h3>
+							<ol class="watch-list">
+								{#each phase.titles as item (item.id)}
+									{@render watchRow(item, item.n, [item.id])}
+								{/each}
+							</ol>
+						</section>
+					{/each}
+				</section>
 			{/each}
-		</ol>
-	{:else}
-		<nav class="jump-nav" aria-label="Jump to phase">
-			<a href="#infinity-saga">Infinity</a>
-			<a href="#phase-one">P1</a>
-			<a href="#phase-two">P2</a>
-			<a href="#phase-three">P3</a>
-			<a href="#multiverse-saga">Multiverse</a>
-			<a href="#phase-four">P4</a>
-			<a href="#phase-five">P5</a>
-			<a href="#phase-six">P6</a>
-			<a href="#upcoming">Upcoming</a>
-		</nav>
 
-		{#each mcuSagas as saga (saga.id)}
-			<section
-				class="saga"
-				class:saga-infinity={saga.id === 'infinity-saga'}
-				class:saga-multiverse={saga.id === 'multiverse-saga'}
-				id={saga.id}
-			>
-				<h2 class="saga-title">{saga.symbol ? `${saga.symbol} ` : ''}{saga.name}</h2>
+			<aside class="footnote">
+				<p>
+					<strong>X-Men ’97</strong> and <strong>Your Friendly Neighborhood Spider-Man</strong> take
+					place in alternate universes rather than the MCU’s main Sacred Timeline, but they’re Marvel
+					Studios Animation projects released as part of the Multiverse Saga.
+				</p>
+			</aside>
+		</div>
 
-				{#each saga.phases as phase (phase.id)}
-					<section class="phase" class:phase-upcoming={phase.upcoming} id={phase.id}>
-						<h3 class="phase-title">{phase.name}</h3>
-						<ol class="watch-list">
-							{#each phase.titles as item (item.id)}
-								{@render watchRow(item, item.n, [item.id])}
-							{/each}
-						</ol>
-					</section>
+		<div class="list-pane" class:active={doom} inert={!doom} aria-hidden={!doom}>
+			<ol class="watch-list doom-list">
+				{#each doomsdayTitles as item, i (item.id)}
+					{@render watchRow(item, i + 1, entryIds(item))}
 				{/each}
-			</section>
-		{/each}
-
-		<aside class="footnote">
-			<p>
-				<strong>X-Men ’97</strong> and <strong>Your Friendly Neighborhood Spider-Man</strong> take
-				place in alternate universes rather than the MCU’s main Sacred Timeline, but they’re Marvel
-				Studios Animation projects released as part of the Multiverse Saga.
-			</p>
-		</aside>
-	{/if}
+			</ol>
+		</div>
+	</div>
 </div>
 
 {#snippet watchRow(

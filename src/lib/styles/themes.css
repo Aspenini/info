@@ -44,12 +44,18 @@
 	--font-body: 'Outfit', system-ui, sans-serif;
 }
 
-.page[data-theme='mcu']::before {
+.page[data-theme='mcu']::before,
+.page[data-theme='mcu']::after {
 	content: '';
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
 	z-index: 0;
+	transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page[data-theme='mcu']::before {
+	opacity: 1;
 	background:
 		radial-gradient(900px 480px at 90% 0%, rgba(226, 176, 74, 0.14), transparent 58%),
 		radial-gradient(700px 420px at 0% 100%, rgba(124, 92, 255, 0.1), transparent 55%),
@@ -61,16 +67,25 @@
 		radial-gradient(1.5px 1.5px at 91% 86%, rgba(255, 255, 255, 0.28) 50%, transparent 51%);
 }
 
+.page[data-theme='mcu']::after {
+	opacity: 0;
+	background:
+		radial-gradient(70% 55% at 50% -8%, rgba(201, 162, 39, 0.22), transparent 58%),
+		radial-gradient(90% 70% at 50% 115%, rgba(90, 16, 24, 0.28), transparent 62%),
+		radial-gradient(50% 40% at 0% 40%, rgba(24, 78, 48, 0.28), transparent 70%),
+		radial-gradient(50% 40% at 100% 40%, rgba(24, 78, 48, 0.28), transparent 70%),
+		linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 28%, rgba(0, 0, 0, 0.45));
+}
+
 .app[data-mode='doomsday'] {
 	--chrome-bg: #060806;
 	--chrome-fg: #e6eee3;
 	--chrome-muted: #7f8f7a;
 	--chrome-accent: #c9a227;
 	--chrome-border: #2c3b2c;
-	--chrome-display: 'Cinzel', 'Times New Roman', serif;
 }
 
-.page[data-theme='doom'] {
+.page[data-theme='mcu'][data-mode='doomsday'] {
 	--bg: #050805;
 	--bg-elevated: #101610;
 	--fg: #e8efe4;
@@ -79,20 +94,12 @@
 	--border: #2c3b2c;
 	--success: #c9a227;
 	--code-bg: #0b120c;
-	--font-display: 'Cinzel', 'Times New Roman', serif;
-	--font-body: 'Outfit', system-ui, sans-serif;
 }
 
-.page[data-theme='doom']::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	z-index: 0;
-	background:
-		radial-gradient(70% 55% at 50% -8%, rgba(201, 162, 39, 0.22), transparent 58%),
-		radial-gradient(90% 70% at 50% 115%, rgba(90, 16, 24, 0.28), transparent 62%),
-		radial-gradient(50% 40% at 0% 40%, rgba(24, 78, 48, 0.28), transparent 70%),
-		radial-gradient(50% 40% at 100% 40%, rgba(24, 78, 48, 0.28), transparent 70%),
-		linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 28%, rgba(0, 0, 0, 0.45));
+.page[data-theme='mcu'][data-mode='doomsday']::before {
+	opacity: 0;
+}
+
+.page[data-theme='mcu'][data-mode='doomsday']::after {
+	opacity: 1;
 }
