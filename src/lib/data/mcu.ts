@@ -1,5 +1,14 @@
 export type TitleKind = 'movie' | 'series' | 'animated' | 'special';
 
+export const kindLabels: Record<TitleKind, string> = {
+	movie: 'Movie',
+	series: 'Series',
+	animated: 'Animated',
+	special: 'Special'
+};
+
+export const kindKey = ['movie', 'series', 'animated', 'special'] as const satisfies TitleKind[];
+
 export interface McuTitle {
 	id: string;
 	n: number;
@@ -95,7 +104,7 @@ export const mcuSagas: McuSaga[] = [
 					title('fatws', 25, 'The Falcon and the Winter Soldier', '2021', 'series'),
 					title('loki-1', 26, 'Loki — Season 1', '2021', 'series'),
 					title('black-widow', 27, 'Black Widow', '2021', 'movie'),
-					title('what-if-1', 28, 'What If…? — Season 1', '2021', 'animated'),
+					title('what-if-1', 28, 'What If...? — Season 1', '2021', 'animated'),
 					title('shang-chi', 29, 'Shang-Chi and the Legend of the Ten Rings', '2021', 'movie'),
 					title('eternals', 30, 'Eternals', '2021', 'movie'),
 					title('hawkeye', 31, 'Hawkeye', '2021', 'series'),
@@ -121,12 +130,12 @@ export const mcuSagas: McuSaga[] = [
 					title('i-am-groot-2', 45, 'I Am Groot — Season 2', '2023', 'animated'),
 					title('loki-2', 46, 'Loki — Season 2', '2023', 'series'),
 					title('the-marvels', 47, 'The Marvels', '2023', 'movie'),
-					title('what-if-2', 48, 'What If…? — Season 2', '2023', 'animated'),
+					title('what-if-2', 48, 'What If...? — Season 2', '2023', 'animated'),
 					title('echo', 49, 'Echo', '2024', 'series'),
 					title('xmen-97-1', 50, "X-Men '97 — Season 1", '2024', 'animated', true),
 					title('deadpool-wolverine', 51, 'Deadpool & Wolverine', '2024', 'movie'),
 					title('agatha', 52, 'Agatha All Along', '2024', 'series'),
-					title('what-if-3', 53, 'What If…? — Season 3', '2024', 'animated'),
+					title('what-if-3', 53, 'What If...? — Season 3', '2024', 'animated'),
 					title(
 						'yfn-spiderman-1',
 						54,
@@ -168,10 +177,10 @@ export const mcuSagas: McuSaga[] = [
 						'animated',
 						true
 					),
-					title('visionquest', 68, 'VisionQuest', 'Oct 14, 2026', 'series'),
-					title('doomsday', 69, 'Avengers: Doomsday', 'Dec 18, 2026', 'movie'),
+					title('visionquest', 68, 'VisionQuest', 'October 14, 2026', 'series'),
+					title('doomsday', 69, 'Avengers: Doomsday', 'December 18, 2026', 'movie'),
 					title('daredevil-ba-3', 70, 'Daredevil: Born Again — Season 3', '2027', 'series'),
-					title('secret-wars', 71, 'Avengers: Secret Wars', 'Dec 17, 2027', 'movie')
+					title('secret-wars', 71, 'Avengers: Secret Wars', 'December 17, 2027', 'movie')
 				]
 			}
 		]

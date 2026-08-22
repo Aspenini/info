@@ -21,6 +21,20 @@
 	font-size: 1.02rem;
 }
 
+.kind-key {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.85rem;
+	margin: 0.85rem 0 0;
+	padding: 0;
+	list-style: none;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--fg-muted);
+}
+
 .progress-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -156,10 +170,27 @@
 	font-weight: 600;
 }
 
+.watch-alt {
+	margin-left: 0.15rem;
+	font-weight: 700;
+	color: var(--accent);
+	text-decoration: none;
+	border: 0;
+	cursor: help;
+}
+
+.watch-kind,
 .watch-year {
+	flex: 0 0 auto;
 	font-family: var(--font-mono);
-	font-size: 0.78rem;
+	font-size: 0.72rem;
 	color: var(--fg-muted);
+	white-space: nowrap;
+}
+
+.watch-kind {
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
 }
 
 .watch-item input:checked ~ .watch-title {
@@ -183,8 +214,12 @@
 		margin-left: 1.85rem;
 	}
 
+	.watch-kind,
 	.watch-year {
 		order: 4;
+	}
+
+	.watch-kind {
 		margin-left: 1.85rem;
 	}
 
