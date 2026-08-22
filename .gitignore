@@ -1,0 +1,29 @@
+node_modules/
+
+# Local screenshot / verify dumps
+.verify-svelte/
+.verify*/
+
+# Build output
+.output/
+.vercel/
+.netlify/
+.wrangler/
+.svelte-kit/
+build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

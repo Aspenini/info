@@ -1,0 +1,31 @@
+# Check out as LF everywhere so Windows and GitHub Actions match.
+* text=auto eol=lf
+
+*.{cmd,bat,ps1} text eol=crlf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.zip binary
+
+*.svg text
+*.json text
+*.yml text
+*.yaml text
+*.md text
+*.html text
+*.css text
+*.js text
+*.ts text
+*.svelte text
+
+bun.lock linguist-generated=true
