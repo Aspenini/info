@@ -364,6 +364,20 @@
 	transform: translate3d(0, 0, 0);
 }
 
+.doom-figure-left {
+	right: auto;
+	left: 0;
+	width: min(38vw, 520px);
+	max-height: 92vh;
+	object-position: left bottom;
+	transform: scale(0.97);
+	transform-origin: left bottom;
+}
+
+.doom-figure-left.active {
+	transform: scale(1);
+}
+
 @media (min-width: 900px) {
 	.doom-figure {
 		display: block;
@@ -401,6 +415,16 @@
 
 .mcu-page.motion + .doom-figure.active {
 	transition-delay: 0.1s;
+}
+
+.mcu-page.motion ~ .doom-figure-left {
+	transition:
+		opacity 0.95s var(--mode-ease),
+		transform 1.05s var(--mode-ease);
+}
+
+.mcu-page.motion ~ .doom-figure-left.active {
+	transition-delay: 0.16s;
 }
 
 .mcu-page.motion .mode-toggle,

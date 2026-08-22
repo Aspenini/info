@@ -9,6 +9,7 @@
 		type TitleKind
 	} from '$lib/data/mcu';
 	import doomFigure from '$lib/assets/doomsday/doom.webp';
+	import doomFigureLeft from '$lib/assets/doomsday/doom2.webp';
 	import doomsdayLogo from '$lib/assets/doomsday/doomsday_logo.webp';
 	import {
 		doomsdayFromHash,
@@ -244,6 +245,14 @@
 	class="doom-figure"
 	class:active={doom && doomReady}
 	src={doomFigure}
+	alt=""
+	aria-hidden="true"
+	draggable="false"
+/>
+<img
+	class="doom-figure doom-figure-left"
+	class:active={doom && doomReady}
+	src={doomFigureLeft}
 	alt=""
 	aria-hidden="true"
 	draggable="false"
