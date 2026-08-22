@@ -21,6 +21,7 @@
 	let watched = $state<Record<string, boolean>>({});
 	let listStack = $state<HTMLDivElement>();
 	let motion = $state(false);
+	let doomReady = $state(false);
 	let heightAnim: Animation | undefined;
 	let logoFailed = $state(false);
 
@@ -95,6 +96,9 @@
 		}
 		requestAnimationFrame(() => {
 			motion = true;
+			requestAnimationFrame(() => {
+				doomReady = true;
+			});
 		});
 	});
 </script>
@@ -203,7 +207,7 @@
 
 <img
 	class="doom-figure"
-	class:active={doom}
+	class:active={doom && doomReady}
 	src={doomFigure}
 	alt=""
 	aria-hidden="true"

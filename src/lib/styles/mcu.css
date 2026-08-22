@@ -1,8 +1,11 @@
+.page[data-theme='mcu'] {
+	--mode-ease: cubic-bezier(0.23, 1, 0.32, 1);
+	--mode-duration: 0.88s;
+}
+
 .mcu-page {
 	position: relative;
 	z-index: 1;
-	--mode-ease: cubic-bezier(0.23, 1, 0.32, 1);
-	--mode-duration: 0.88s;
 }
 
 .page[data-mode='doomsday'] .mcu-page {
@@ -379,12 +382,12 @@
 	user-select: none;
 	z-index: 0;
 	opacity: 0;
-	transform: translateY(16px);
+	transform: translate3d(0, 100%, 0);
 }
 
 .doom-figure.active {
 	opacity: 1;
-	transform: none;
+	transform: translate3d(0, 0, 0);
 }
 
 @media (min-width: 900px) {
@@ -404,17 +407,26 @@
 
 .mcu-page.motion .hero-copy,
 .mcu-page.motion .list-pane,
-.mcu-page.motion .mode-toggle-thumb,
-.mcu-page.motion + .doom-figure {
+.mcu-page.motion .mode-toggle-thumb {
 	transition:
 		opacity var(--mode-duration) var(--mode-ease),
 		transform var(--mode-duration) var(--mode-ease),
 		background-color 0.95s var(--mode-ease);
 }
 
+.mcu-page.motion + .doom-figure {
+	transition:
+		opacity 0.55s var(--mode-ease),
+		transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .mcu-page.motion .hero-copy.active,
 .mcu-page.motion .list-pane.active {
 	transition-delay: 0.08s;
+}
+
+.mcu-page.motion + .doom-figure.active {
+	transition-delay: 0.1s;
 }
 
 .mcu-page.motion .mode-toggle,
