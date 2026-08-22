@@ -198,7 +198,7 @@
 	</div>
 
 	<div class="list-stack" bind:this={listStack}>
-		<div class="list-pane" class:active={!doom} inert={doom} aria-hidden={doom}>
+		<div id="release-order" class="list-pane" class:active={!doom} inert={doom} aria-hidden={doom}>
 			{#each mcuSagas as saga (saga.id)}
 				<section
 					class="saga"
@@ -230,7 +230,7 @@
 			</aside>
 		</div>
 
-		<div class="list-pane" class:active={doom} inert={!doom} aria-hidden={!doom}>
+		<div id="doomsday" class="list-pane" class:active={doom} inert={!doom} aria-hidden={!doom}>
 			<ol class="watch-list doom-list">
 				{#each doomsdayTitles as item, i (item.id)}
 					{@render watchRow(item, i + 1, entryIds(item))}

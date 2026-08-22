@@ -3,6 +3,11 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+	build: {
+		// Vite 8 minifies CSS with LightningCSS, which drops unprefixed
+		// `backdrop-filter` when `-webkit-backdrop-filter` is also present.
+		cssMinify: 'esbuild'
+	},
 	plugins: [
 		sveltekit({
 			compilerOptions: {
