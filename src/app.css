@@ -28,8 +28,10 @@
 html {
 	color-scheme: dark;
 	scroll-behavior: smooth;
-	overflow-x: hidden;
-	background: var(--bg);
+	overflow-x: clip;
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+	background: var(--chrome-bg);
 }
 
 body {
@@ -39,7 +41,7 @@ body {
 	font-size: 16px;
 	line-height: 1.6;
 	color: var(--fg);
-	background: var(--bg);
+	background: var(--chrome-bg);
 }
 
 a:focus-visible,
@@ -64,6 +66,7 @@ input:focus-visible {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	min-width: 0;
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--font-body);
@@ -95,6 +98,8 @@ input:focus-visible {
 	position: sticky;
 	top: 0;
 	z-index: 20;
+	flex: 0 0 auto;
+	min-width: 0;
 	padding: 1rem 0;
 	border-bottom: 1px solid var(--chrome-border);
 	background: var(--chrome-bg);
@@ -348,6 +353,8 @@ code {
 }
 
 .site-footer {
+	flex: 0 0 auto;
+	min-width: 0;
 	padding: 1.4rem 0;
 	border-top: 1px solid var(--chrome-border);
 	background: var(--chrome-bg);
