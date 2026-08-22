@@ -117,25 +117,29 @@
 	transform: translateX(100%);
 }
 
-.mode-toggle button {
+.mode-toggle a {
 	position: relative;
 	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-family: var(--font-mono);
 	font-size: 0.75rem;
 	letter-spacing: 0.04em;
 	color: var(--fg-muted);
 	background: transparent;
-	border: 0;
 	border-radius: 999px;
 	padding: 0.32rem 0.9rem;
+	text-decoration: none;
+	text-align: center;
 	cursor: pointer;
 }
 
-.mode-toggle button[aria-pressed='true'] {
+.mode-toggle a[aria-current='page'] {
 	color: #0b0d12;
 }
 
-.mode-toggle button:hover:not([aria-pressed='true']) {
+.mode-toggle a:hover:not([aria-current='page']) {
 	color: var(--fg);
 }
 
@@ -170,32 +174,6 @@
 .progress-row button:hover {
 	color: var(--fg);
 	border-color: var(--accent);
-}
-
-.jump-nav {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	min-width: 0;
-	gap: 0.35rem;
-	margin: 0 0 1.75rem;
-	font-family: var(--font-mono);
-	font-size: 0.78rem;
-}
-
-.jump-nav a {
-	flex: 0 0 auto;
-	padding: 0.28rem 0.62rem;
-	color: var(--accent);
-	text-decoration: none;
-	border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
-	border-radius: 999px;
-	background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
-	white-space: nowrap;
-}
-
-.jump-nav a:hover {
-	background: color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .saga {
@@ -362,10 +340,6 @@
 	.watch-kind {
 		margin-left: 1.85rem;
 	}
-
-	.jump-nav a {
-		padding: 0.24rem 0.5rem;
-	}
 }
 
 .doom-figure {
@@ -430,9 +404,8 @@
 }
 
 .mcu-page.motion .mode-toggle,
-.mcu-page.motion .mode-toggle button,
-.mcu-page.motion .progress-row button,
-.mcu-page.motion .jump-nav a {
+.mcu-page.motion .mode-toggle a,
+.mcu-page.motion .progress-row button {
 	transition:
 		color 0.55s var(--mode-ease),
 		background-color 0.55s var(--mode-ease),

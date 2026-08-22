@@ -10,9 +10,17 @@
 	} from '$lib/data/mcu';
 	import doomFigure from '$lib/assets/doomsday/doom.webp';
 	import doomsdayLogo from '$lib/assets/doomsday/doomsday_logo.webp';
-	import { loadMcuView, mcuView, setDoomsday } from '$lib/mcu-mode.svelte';
+	import {
+		doomsdayFromHash,
+		loadMcuView,
+		mcuHash,
+		mcuView,
+		setDoomsday
+	} from '$lib/mcu-mode.svelte';
 	import { site } from '$lib/pages';
 	import '$lib/styles/mcu.css';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { onMount, tick } from 'svelte';
 
 	const KEY = 'checklist:mcu';
@@ -60,6 +68,12 @@
 		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
 
+	async function applyHash(value: boolean, replaceState = false) {
+		const hash = mcuHash(value);
+		if (page.url.hash === hash) return;
+		await goto(hash, { replaceState, noScroll: true, keepFocus: true });
+	}
+
 	async function switchMode(value: boolean) {
 		if (value === mcuView.doomsday) return;
 
@@ -68,6 +82,7 @@
 		const from = el?.getBoundingClientRect().height ?? 0;
 
 		setDoomsday(value);
+		await applyHash(value);
 
 		if (window.scrollY > 140) {
 			window.scrollTo({ top: 0, behavior: canAnim ? 'smooth' : 'auto' });
@@ -87,8 +102,28 @@
 		heightAnim = anim;
 	}
 
+	function modeClick(event: MouseEvent, value: boolean) {
+		if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+			return;
+		}
+		event.preventDefault();
+		void switchMode(value);
+	}
+
+	$effect(() => {
+		const fromHash = doomsdayFromHash(page.url.hash);
+		if (fromHash === null) return;
+		setDoomsday(fromHash);
+	});
+
 	onMount(() => {
-		loadMcuView();
+		const fromHash = doomsdayFromHash(window.location.hash);
+		if (fromHash === null) {
+			loadMcuView();
+			void applyHash(mcuView.doomsday, true);
+		} else {
+			setDoomsday(fromHash);
+		}
 		try {
 			watched = JSON.parse(localStorage.getItem(KEY) || '{}') ?? {};
 		} catch {
@@ -140,8 +175,20 @@
 
 		<div class="mode-toggle" class:is-doom={doom} role="group" aria-label="Watch list">
 			<span class="mode-toggle-thumb"></span>
-			<button type="button" aria-pressed={!doom} onclick={() => switchMode(false)}>Release order</button>
-			<button type="button" aria-pressed={doom} onclick={() => switchMode(true)}>Doomsday</button>
+			<a
+				href={mcuHash(false)}
+				aria-current={!doom ? 'page' : undefined}
+				onclick={(e) => modeClick(e, false)}
+			>
+				Release order
+			</a>
+			<a
+				href={mcuHash(true)}
+				aria-current={doom ? 'page' : undefined}
+				onclick={(e) => modeClick(e, true)}
+			>
+				Doomsday
+			</a>
 		</div>
 	</header>
 
@@ -152,18 +199,6 @@
 
 	<div class="list-stack" bind:this={listStack}>
 		<div class="list-pane" class:active={!doom} inert={doom} aria-hidden={doom}>
-			<nav class="jump-nav" aria-label="Jump to phase">
-				<a href="#infinity-saga">Infinity</a>
-				<a href="#phase-one">P1</a>
-				<a href="#phase-two">P2</a>
-				<a href="#phase-three">P3</a>
-				<a href="#multiverse-saga">Multiverse</a>
-				<a href="#phase-four">P4</a>
-				<a href="#phase-five">P5</a>
-				<a href="#phase-six">P6</a>
-				<a href="#upcoming">Upcoming</a>
-			</nav>
-
 			{#each mcuSagas as saga (saga.id)}
 				<section
 					class="saga"
