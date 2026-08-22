@@ -1,4 +1,4 @@
-.app[data-theme='hub'] {
+.page[data-theme='hub'] {
 	--bg: #0b0d12;
 	--bg-elevated: #141820;
 	--fg: #e8edf5;
@@ -7,10 +7,9 @@
 	--border: #2a3140;
 	--font-display: 'IBM Plex Sans', system-ui, sans-serif;
 	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
-	--header-bg: color-mix(in srgb, #0b0d12 88%, transparent);
 }
 
-.app[data-theme='homebrew'] {
+.page[data-theme='homebrew'] {
 	--bg: #06110a;
 	--bg-elevated: #0b1c12;
 	--fg: #d7f8dc;
@@ -21,24 +20,18 @@
 	--code-bg: #07140c;
 	--font-display: 'IBM Plex Mono', ui-monospace, monospace;
 	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
-	--header-bg: color-mix(in srgb, #06110a 88%, transparent);
 }
 
-.app[data-theme='homebrew']::before {
+.page[data-theme='homebrew']::before {
 	content: '';
-	position: fixed;
+	position: absolute;
 	inset: 0;
 	pointer-events: none;
 	background: radial-gradient(1200px 500px at 10% -10%, rgba(61, 255, 122, 0.1), transparent 50%);
 	z-index: 0;
 }
 
-.app[data-theme='homebrew'] .logo::before {
-	content: '> ';
-	color: var(--accent);
-}
-
-.app[data-theme='mcu'] {
+.page[data-theme='mcu'] {
 	--bg: #05060d;
 	--bg-elevated: #0d1222;
 	--fg: #f4f1ea;
@@ -50,12 +43,11 @@
 	--code-bg: #090c18;
 	--font-display: 'Bebas Neue', Impact, sans-serif;
 	--font-body: 'Outfit', system-ui, sans-serif;
-	--header-bg: color-mix(in srgb, #05060d 82%, transparent);
 }
 
-.app[data-theme='mcu']::before {
+.page[data-theme='mcu']::before {
 	content: '';
-	position: fixed;
+	position: absolute;
 	inset: 0;
 	pointer-events: none;
 	z-index: 0;
@@ -68,9 +60,4 @@
 		radial-gradient(1.5px 1.5px at 81% 58%, rgba(255, 255, 255, 0.22) 50%, transparent 51%),
 		radial-gradient(1.5px 1.5px at 47% 41%, rgba(255, 255, 255, 0.2) 50%, transparent 51%),
 		radial-gradient(1.5px 1.5px at 91% 86%, rgba(255, 255, 255, 0.28) 50%, transparent 51%);
-}
-
-.app[data-theme='mcu'] .logo {
-	font-size: 1.85rem;
-	letter-spacing: 0.14em;
 }

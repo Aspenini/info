@@ -16,10 +16,12 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="app" data-theme={theme}>
-	<SiteHeader {theme} />
-	<main id="content" class="main">
-		{@render children()}
-	</main>
+<div class="app">
+	<SiteHeader />
+	<div class="page" data-theme={theme}>
+		<main id="content" class="main">
+			{@render children()}
+		</main>
+	</div>
 	<SiteFooter />
 </div>

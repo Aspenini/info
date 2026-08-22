@@ -12,7 +12,13 @@
 	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 	--radius: 12px;
-	--header-bg: color-mix(in srgb, var(--bg) 86%, transparent);
+	--chrome-bg: #0b0d12;
+	--chrome-fg: #e8edf5;
+	--chrome-muted: #8b93a7;
+	--chrome-accent: #6ea8ff;
+	--chrome-border: #2a3140;
+	--chrome-display: 'IBM Plex Sans', system-ui, sans-serif;
+	--chrome-body: 'IBM Plex Sans', system-ui, sans-serif;
 }
 
 * {
@@ -48,6 +54,16 @@ input:focus-visible {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	background: var(--chrome-bg);
+	color: var(--chrome-fg);
+	font-family: var(--chrome-body);
+}
+
+.page {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--font-body);
@@ -64,7 +80,7 @@ input:focus-visible {
 	position: absolute;
 	left: -999px;
 	top: 0;
-	background: var(--accent);
+	background: var(--chrome-accent);
 	color: #0b0d12;
 	padding: 0.5rem 0.8rem;
 	z-index: 100;
@@ -80,9 +96,10 @@ input:focus-visible {
 	top: 0;
 	z-index: 20;
 	padding: 1rem 0;
-	border-bottom: 1px solid var(--border);
-	background: var(--header-bg);
-	backdrop-filter: blur(14px);
+	border-bottom: 1px solid var(--chrome-border);
+	background: var(--chrome-bg);
+	color: var(--chrome-fg);
+	font-family: var(--chrome-body);
 }
 
 .header-inner {
@@ -100,18 +117,18 @@ input:focus-visible {
 }
 
 .logo {
-	font-family: var(--font-display);
+	font-family: var(--chrome-display);
 	font-size: 1.45rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
-	color: var(--fg);
+	color: var(--chrome-fg);
 	text-decoration: none;
 }
 
 .tagline {
 	margin: 0.1rem 0 0;
 	font-size: 0.85rem;
-	color: var(--fg-muted);
+	color: var(--chrome-muted);
 }
 
 .main {
@@ -332,7 +349,10 @@ code {
 
 .site-footer {
 	padding: 1.4rem 0;
-	border-top: 1px solid var(--border);
+	border-top: 1px solid var(--chrome-border);
+	background: var(--chrome-bg);
+	color: var(--chrome-muted);
+	font-family: var(--chrome-body);
 	position: relative;
 	z-index: 1;
 }
@@ -340,16 +360,16 @@ code {
 .site-footer p {
 	margin: 0;
 	font-size: 0.88rem;
-	color: var(--fg-muted);
+	color: var(--chrome-muted);
 }
 
 .site-footer a {
-	color: var(--fg-muted);
+	color: var(--chrome-muted);
 	text-decoration: none;
 }
 
 .site-footer a:hover {
-	color: var(--accent);
+	color: var(--chrome-accent);
 }
 
 @media (max-width: 640px) {
