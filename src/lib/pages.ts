@@ -11,7 +11,7 @@ export const pages = [
 ] as const;
 
 export type PageSlug = (typeof pages)[number]['slug'];
-export type ThemeId = 'hub' | PageSlug;
+export type ThemeId = 'hub' | PageSlug | 'doom';
 
 export function themeFromPath(pathname: string): ThemeId {
 	const slug = pathname.replace(/^\/+|\/+$/g, '').split('/')[0];

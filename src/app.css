@@ -57,6 +57,9 @@ input:focus-visible {
 	background: var(--chrome-bg);
 	color: var(--chrome-fg);
 	font-family: var(--chrome-body);
+	transition:
+		background-color 0.45s ease,
+		color 0.45s ease;
 }
 
 .page {
@@ -68,6 +71,9 @@ input:focus-visible {
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--font-body);
+	transition:
+		background-color 0.45s ease,
+		color 0.45s ease;
 }
 
 .container {
@@ -103,6 +109,10 @@ input:focus-visible {
 	background: var(--chrome-bg);
 	color: var(--chrome-fg);
 	font-family: var(--chrome-body);
+	transition:
+		background-color 0.45s ease,
+		color 0.45s ease,
+		border-color 0.45s ease;
 }
 
 .header-inner {
@@ -233,6 +243,10 @@ code {
 	font-family: var(--chrome-body);
 	position: relative;
 	z-index: 1;
+	transition:
+		background-color 0.45s ease,
+		color 0.45s ease,
+		border-color 0.45s ease;
 }
 
 .site-footer p {

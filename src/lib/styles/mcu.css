@@ -6,12 +6,61 @@
 	margin: 0 0 1.25rem;
 }
 
+.hero-kicker {
+	margin: 0 0 0.2rem;
+	font-family: var(--font-display);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--fg-muted);
+}
+
 .hero-title {
 	margin: 0;
 	font-size: clamp(3.2rem, 12vw, 5.5rem);
 	letter-spacing: 0.06em;
 	line-height: 0.9;
-	color: #e2b04a;
+	color: var(--accent);
+}
+
+.page[data-theme='doom'] .hero-title {
+	letter-spacing: 0.12em;
+	text-shadow: 0 0 42px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.page[data-theme='doom'] .watch-item label {
+	border-radius: 4px;
+}
+
+.mode-toggle {
+	display: inline-flex;
+	margin: 1rem 0 0;
+	padding: 0.16rem;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+}
+
+.mode-toggle button {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	color: var(--fg-muted);
+	background: transparent;
+	border: 0;
+	border-radius: 999px;
+	padding: 0.32rem 0.85rem;
+	cursor: pointer;
+}
+
+.mode-toggle button[aria-pressed='true'] {
+	color: #0b0d12;
+	background: var(--accent);
+}
+
+.mode-toggle button:hover:not([aria-pressed='true']) {
+	color: var(--fg);
 }
 
 .hero-sub {

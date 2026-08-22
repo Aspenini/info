@@ -193,3 +193,45 @@ export const mcuTitles: McuTitle[] = mcuSagas.flatMap((saga) =>
 
 export const mcuIds = mcuTitles.map((t) => t.id);
 
+export interface DoomsdayEntry {
+	id: string;
+	title: string;
+	year: string;
+	kind: TitleKind;
+	ids?: string[];
+}
+
+function fromId(id: string, overrides?: Partial<Pick<DoomsdayEntry, 'title' | 'year' | 'ids'>>): DoomsdayEntry {
+	const match = mcuTitles.find((item) => item.id === id);
+	if (!match) throw new Error(`Missing MCU title ${id}`);
+	return {
+		id: match.id,
+		title: match.title,
+		year: match.year,
+		kind: match.kind,
+		...overrides
+	};
+}
+
+export const doomsdayTitles: DoomsdayEntry[] = [
+	{ id: 'fox-xmen', title: 'X-Men', year: '2000', kind: 'movie' },
+	{ id: 'fox-x2', title: 'X2', year: '2003', kind: 'movie' },
+	fromId('cap-first-avenger'),
+	fromId('avengers'),
+	fromId('infinity-war'),
+	fromId('endgame'),
+	fromId('loki-1', { title: 'Loki', ids: ['loki-1', 'loki-2'] }),
+	fromId('shang-chi'),
+	fromId('no-way-home'),
+	fromId('wakanda-forever'),
+	fromId('brave-new-world'),
+	fromId('deadpool-wolverine'),
+	fromId('multiverse-of-madness'),
+	fromId('thunderbolts'),
+	fromId('fantastic-four')
+];
+
+export function entryIds(entry: Pick<DoomsdayEntry, 'id' | 'ids'>): string[] {
+	return entry.ids ?? [entry.id];
+}
+
