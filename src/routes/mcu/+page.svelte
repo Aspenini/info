@@ -60,6 +60,7 @@
 	}
 
 	function clearProgress() {
+		if (done === 0) return;
 		if (!confirm('Clear all watched progress on this list?')) return;
 		watched = {};
 		persist();
@@ -124,6 +125,8 @@
 			void applyHash(mcuView.doomsday, true);
 		} else {
 			setDoomsday(fromHash);
+			// These hashes select a view rather than a position within the page.
+			requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'auto' }));
 		}
 		try {
 			watched = JSON.parse(localStorage.getItem(KEY) || '{}') ?? {};
@@ -193,9 +196,9 @@
 		</div>
 	</header>
 
-	<div class="progress-row">
+	<div class="progress-row" aria-live="polite">
 		<span>{done} / {total} watched</span>
-		<button type="button" onclick={clearProgress}>Clear</button>
+		<button type="button" onclick={clearProgress} disabled={done === 0}>Clear</button>
 	</div>
 
 	<div class="list-stack" bind:this={listStack}>

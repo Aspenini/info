@@ -176,6 +176,16 @@
 	border-color: var(--accent);
 }
 
+.progress-row button:disabled {
+	opacity: 0.42;
+	cursor: default;
+}
+
+.progress-row button:disabled:hover {
+	color: var(--fg-muted);
+	border-color: var(--border);
+}
+
 .saga {
 	margin: 0 0 2.4rem;
 }
@@ -381,6 +391,124 @@
 @media (min-width: 900px) {
 	.doom-figure {
 		display: block;
+	}
+}
+
+/* Keep the full cinematic checklist composed inside shorter desktop viewports. */
+@media (min-width: 900px) and (max-height: 1100px) {
+	.app[data-mode='doomsday'] .site-header {
+		padding-block: 0.55rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .container,
+	.app[data-mode='doomsday'] .site-footer .container,
+	.page[data-theme='mcu'][data-mode='doomsday'] .mcu-page {
+		max-width: 48rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .logo {
+		font-size: 1.15rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .tagline {
+		font-size: 0.75rem;
+		line-height: 1.35;
+	}
+
+	.page[data-theme='mcu'][data-mode='doomsday'] .main {
+		padding-block: 1rem 1.5rem;
+	}
+
+	.page[data-mode='doomsday'] .mcu-page {
+		padding-top: 0.65rem;
+		padding-bottom: 1.2rem;
+		background: color-mix(in srgb, #0a1610 42%, transparent);
+		-webkit-mask-image:
+			linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2rem), transparent),
+			linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);
+		mask-image:
+			linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2rem), transparent),
+			linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);
+	}
+
+	.page[data-mode='doomsday'] .mcu-hero {
+		margin-bottom: 0.65rem;
+	}
+
+	.page[data-mode='doomsday'] .hero-logo {
+		width: min(25rem, 100%);
+	}
+
+	.page[data-mode='doomsday'] .hero-sub {
+		margin-top: 0.35rem;
+		font-size: 0.9rem;
+	}
+
+	.page[data-mode='doomsday'] .mode-toggle {
+		margin-top: 0.55rem;
+	}
+
+	.page[data-mode='doomsday'] .mode-toggle a {
+		padding: 0.24rem 0.75rem;
+		font-size: 0.68rem;
+	}
+
+	.page[data-mode='doomsday'] .progress-row {
+		gap: 0.45rem 0.75rem;
+		margin-bottom: 0.55rem;
+		font-size: 0.82rem;
+	}
+
+	.page[data-mode='doomsday'] .progress-row button {
+		padding: 0.18rem 0.6rem;
+		font-size: 0.68rem;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-item label {
+		gap: 0.3rem 0.6rem;
+		padding: 0.26rem 0.45rem;
+		line-height: 1.35;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-item input[type='checkbox'] {
+		width: 0.95rem;
+		height: 0.95rem;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-num {
+		font-size: 0.7rem;
+		min-width: 1.5rem;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-title {
+		font-size: 0.92rem;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-kind,
+	.page[data-mode='doomsday'] .doom-list .watch-year {
+		font-size: 0.66rem;
+	}
+
+	.doom-figure {
+		right: -2vw;
+		bottom: 0;
+		width: min(65vw, 100vh, 60rem);
+		filter: brightness(1.08) saturate(0.95);
+	}
+
+	.doom-figure.active {
+		opacity: 1;
+	}
+
+	.doom-figure-left {
+		right: auto;
+		left: -1vw;
+		bottom: 0;
+		width: min(30vw, 43vh, 29rem);
+	}
+
+	.app[data-mode='doomsday'] .site-footer {
+		padding-block: 0.8rem;
 	}
 }
 
