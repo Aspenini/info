@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { mcuIds, mcuSagas, mcuTitles, type McuTitle } from '$lib/data/mcu';
+	import { site } from '$lib/pages';
 	import '$lib/styles/mcu.css';
 	import { onMount } from 'svelte';
 
@@ -43,7 +44,7 @@
 </script>
 
 <svelte:head>
-	<title>MCU Watch Order | Info</title>
+	<title>MCU Watch Order | {site.name}</title>
 	<meta
 		name="description"
 		content="MCU movies and shows watch order — Infinity Saga through Multiverse Saga, including upcoming titles through Avengers: Secret Wars."
@@ -73,7 +74,7 @@
 		<a href="#upcoming">Upcoming</a>
 	</nav>
 
-	{#each mcuSagas as saga}
+	{#each mcuSagas as saga (saga.id)}
 		<section
 			class="saga"
 			class:saga-infinity={saga.id === 'infinity-saga'}

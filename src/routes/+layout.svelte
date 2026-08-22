@@ -2,7 +2,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import SiteFooter from '$lib/components/SiteFooter.svelte';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import { themeFromPath } from '$lib/theme';
+	import { themeFromPath } from '$lib/pages';
 	import { page } from '$app/state';
 	import '../app.css';
 	import '$lib/styles/themes.css';

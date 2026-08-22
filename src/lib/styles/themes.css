@@ -9,7 +9,7 @@
 	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
 }
 
-.page[data-theme='homebrew'] {
+.page[data-theme='wiiu'] {
 	--bg: #06110a;
 	--bg-elevated: #0b1c12;
 	--fg: #d7f8dc;
@@ -22,7 +22,7 @@
 	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
 }
 
-.page[data-theme='homebrew']::before {
+.page[data-theme='wiiu']::before {
 	content: '';
 	position: absolute;
 	inset: 0;
@@ -37,7 +37,6 @@
 	--fg: #f4f1ea;
 	--fg-muted: #9aa4c4;
 	--accent: #e2b04a;
-	--accent-2: #c41e3a;
 	--border: #262d4c;
 	--success: #e2b04a;
 	--code-bg: #090c18;
