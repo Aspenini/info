@@ -106,20 +106,6 @@
 	font-size: 1.02rem;
 }
 
-.kind-key {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.35rem 0.85rem;
-	margin: 0.85rem 0 0;
-	padding: 0;
-	list-style: none;
-	font-family: var(--font-mono);
-	font-size: 0.72rem;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: var(--fg-muted);
-}
-
 .progress-row {
 	display: flex;
 	flex-wrap: wrap;

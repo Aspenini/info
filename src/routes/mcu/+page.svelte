@@ -2,7 +2,6 @@
 	import {
 		doomsdayTitles,
 		entryIds,
-		kindKey,
 		kindLabels,
 		mcuIds,
 		mcuSagas,
@@ -126,12 +125,6 @@
 			<button type="button" aria-pressed={!doom} onclick={() => switchMode(false)}>Release order</button>
 			<button type="button" aria-pressed={doom} onclick={() => switchMode(true)}>Doomsday</button>
 		</div>
-
-		<ul class="kind-key" aria-label="Media types">
-			{#each kindKey as kind}
-				<li>{kindLabels[kind]}</li>
-			{/each}
-		</ul>
 	</header>
 
 	<div class="progress-row">

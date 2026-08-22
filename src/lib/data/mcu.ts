@@ -7,8 +7,6 @@ export const kindLabels: Record<TitleKind, string> = {
 	special: 'Special'
 };
 
-export const kindKey = ['movie', 'series', 'animated', 'special'] as const satisfies TitleKind[];
-
 export interface McuTitle {
 	id: string;
 	n: number;
