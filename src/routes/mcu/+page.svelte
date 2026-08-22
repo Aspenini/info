@@ -8,6 +8,8 @@
 		mcuTitles,
 		type TitleKind
 	} from '$lib/data/mcu';
+	import doomFigure from '$lib/assets/doomsday/doom.webp';
+	import doomsdayLogo from '$lib/assets/doomsday/doomsday_logo.webp';
 	import { loadMcuView, mcuView, setDoomsday } from '$lib/mcu-mode.svelte';
 	import { site } from '$lib/pages';
 	import '$lib/styles/mcu.css';
@@ -20,6 +22,7 @@
 	let listStack = $state<HTMLDivElement>();
 	let motion = $state(false);
 	let heightAnim: Animation | undefined;
+	let logoFailed = $state(false);
 
 	const doom = $derived(mcuView.doomsday);
 	const total = $derived(doom ? doomsdayTitles.length : mcuTitles.length);
@@ -114,8 +117,19 @@
 				<p class="hero-sub">Release order. Check off what you’ve watched — progress stays in this browser.</p>
 			</div>
 			<div class="hero-copy hero-copy-doom" class:active={doom} aria-hidden={!doom}>
-				<p class="hero-kicker">Avengers</p>
-				<h1 class="hero-title">Doomsday</h1>
+				<h1 class="hero-title" class:hero-title-logo={!logoFailed}>
+					{#if !logoFailed}
+						<img
+							class="hero-logo"
+							src={doomsdayLogo}
+							alt="Avengers: Doomsday"
+							onerror={() => (logoFailed = true)}
+						/>
+					{:else}
+						<span class="hero-kicker">Avengers</span>
+						<span class="hero-fallback">Doomsday</span>
+					{/if}
+				</h1>
 				<p class="hero-sub">Disney’s official must-watch list.</p>
 			</div>
 		</div>
@@ -186,6 +200,15 @@
 		</div>
 	</div>
 </div>
+
+<img
+	class="doom-figure"
+	class:active={doom}
+	src={doomFigure}
+	alt=""
+	aria-hidden="true"
+	draggable="false"
+/>
 
 {#snippet watchRow(
 	item: { title: string; year: string; kind: TitleKind; altUniverse?: boolean },
