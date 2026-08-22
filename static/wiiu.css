@@ -35,14 +35,6 @@ html.wiiu .tagline {
   color: #8b949e;
 }
 
-html.wiiu .site-nav a {
-  display: inline-block;
-  margin-right: 1rem;
-  padding: 0.35rem 0;
-  color: #58a6ff;
-  text-decoration: none;
-}
-
 html.wiiu .main {
   padding: 1.5rem 0 2rem;
 }

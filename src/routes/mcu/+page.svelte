@@ -51,10 +51,6 @@
 </svelte:head>
 
 <div class="container mcu-page">
-	<nav class="breadcrumb">
-		<a href="/">Home</a> / MCU
-	</nav>
-
 	<header class="mcu-hero">
 		<h1 class="hero-title">MCU</h1>
 		<p class="hero-sub">Release order. Check off what you’ve watched — progress stays in this browser.</p>
@@ -118,8 +114,4 @@
 			Studios Animation projects released as part of the Multiverse Saga.
 		</p>
 	</aside>
-
-	<nav class="article-nav">
-		<a href="/">← Home</a>
-	</nav>
 </div>

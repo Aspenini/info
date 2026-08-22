@@ -7,10 +7,6 @@
 </svelte:head>
 
 <div class="container">
-	<nav class="breadcrumb">
-		<a href="/">Home</a> / Wii U
-	</nav>
-
 	<article class="article">
 		<header class="article-header">
 			<h1 class="page-title">Wii U VC Injection – UWUVCI AIO</h1>
@@ -176,8 +172,4 @@
 			</ul>
 		</section>
 	</article>
-
-	<nav class="article-nav">
-		<a href="/">← Home</a>
-	</nav>
 </div>
