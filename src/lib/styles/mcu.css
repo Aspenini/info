@@ -336,19 +336,177 @@
 }
 
 @media (max-width: 640px) {
+	.page[data-theme='mcu'] .main {
+		padding-block: 1.25rem 2rem;
+	}
+
+	.page[data-mode='doomsday'] .mcu-page {
+		padding-top: 1rem;
+		padding-bottom: 1.25rem;
+		background: linear-gradient(
+			180deg,
+			color-mix(in srgb, #0a1610 68%, transparent),
+			color-mix(in srgb, #071009 42%, transparent)
+		);
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+		-webkit-mask-image: none;
+		mask-image: none;
+	}
+
+	.page[data-mode='doomsday'] .mcu-hero {
+		margin-bottom: 1rem;
+	}
+
+	.page[data-mode='doomsday'] .hero-logo {
+		width: min(19rem, 100%);
+		margin-inline: auto;
+	}
+
+	.page[data-mode='doomsday'] .hero-sub {
+		margin-top: 0.45rem;
+		font-size: 0.9rem;
+		text-align: center;
+	}
+
+	.page[data-theme='mcu'] .mode-toggle {
+		width: 100%;
+		margin-top: 0.9rem;
+	}
+
+	.page[data-theme='mcu'] .mode-toggle a {
+		min-height: 2.75rem;
+		padding: 0.55rem 0.75rem;
+		font-size: 0.72rem;
+	}
+
+	.page[data-theme='mcu'] .progress-row {
+		justify-content: space-between;
+		margin-bottom: 0.8rem;
+	}
+
+	.page[data-theme='mcu'] .progress-row button {
+		min-height: 2.75rem;
+		padding: 0.4rem 0.85rem;
+	}
+
+	.watch-item + .watch-item {
+		border-top: 1px solid color-mix(in srgb, var(--border) 56%, transparent);
+	}
+
+	.watch-item label,
+	.doom-list .watch-item label {
+		display: grid;
+		grid-template-columns: 1.25rem 1.5rem minmax(0, 1fr) auto;
+		grid-template-areas:
+			'check num title title'
+			'. . kind year';
+		gap: 0.25rem 0.55rem;
+		min-height: 3.75rem;
+		padding: 0.7rem 0.5rem;
+		line-height: 1.35;
+		border-radius: 6px;
+	}
+
+	.watch-item input[type='checkbox'] {
+		grid-area: check;
+		align-self: start;
+		width: 1.25rem;
+		height: 1.25rem;
+		margin-top: 0.05rem;
+	}
+
+	.watch-num {
+		grid-area: num;
+		align-self: start;
+		min-width: 0;
+		padding-top: 0.12rem;
+		font-size: 0.72rem;
+	}
+
 	.watch-title {
-		flex-basis: 100%;
-		order: 3;
-		margin-left: 1.85rem;
+		grid-area: title;
+		min-width: 0;
+		margin: 0;
+		font-size: 0.96rem;
+		overflow-wrap: anywhere;
+	}
+
+	.watch-kind {
+		grid-area: kind;
+		margin: 0;
+	}
+
+	.watch-year {
+		grid-area: year;
+		margin: 0;
+		text-align: right;
 	}
 
 	.watch-kind,
 	.watch-year {
-		order: 4;
+		align-self: center;
+		font-size: 0.68rem;
+		line-height: 1.25;
 	}
 
-	.watch-kind {
-		margin-left: 1.85rem;
+	.app[data-mode='doomsday'] .site-header {
+		padding-top: max(0.65rem, env(safe-area-inset-top));
+		padding-bottom: 0.65rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .logo {
+		font-size: 1.2rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .tagline {
+		font-size: 0.78rem;
+		line-height: 1.35;
+	}
+
+	.app[data-mode='doomsday'] .site-footer {
+		padding-top: 1rem;
+		padding-bottom: max(1rem, env(safe-area-inset-bottom));
+	}
+}
+
+@media (min-width: 641px) and (max-width: 899px) and (max-height: 600px) {
+	.app[data-mode='doomsday'] .site-header {
+		padding-block: 0.45rem;
+	}
+
+	.app[data-mode='doomsday'] .site-header .tagline {
+		display: none;
+	}
+
+	.page[data-mode='doomsday'] .main {
+		padding-block: 0.75rem 1.5rem;
+	}
+
+	.page[data-mode='doomsday'] .mcu-page {
+		padding-top: 0.5rem;
+	}
+
+	.page[data-mode='doomsday'] .hero-logo {
+		width: min(19rem, 48vw);
+	}
+
+	.page[data-mode='doomsday'] .hero-sub {
+		margin-top: 0.25rem;
+		font-size: 0.85rem;
+	}
+
+	.page[data-mode='doomsday'] .mode-toggle {
+		margin-top: 0.55rem;
+	}
+
+	.page[data-mode='doomsday'] .mode-toggle a {
+		min-height: 2.5rem;
+		padding-block: 0.4rem;
+	}
+
+	.page[data-mode='doomsday'] .doom-list .watch-item label {
+		min-height: 2.75rem;
 	}
 }
 
